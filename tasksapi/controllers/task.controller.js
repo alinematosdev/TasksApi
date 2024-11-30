@@ -15,7 +15,7 @@ const getTasks = async (req, res) => {
 
 const filterTask = async (req, res) => {
     try {
-        const { titulo, categoria } = req.query;
+        const { titulo, categoria, status } = req.query;
         let filter = { usuario: req.user.id };
 
         if (titulo) {
@@ -24,6 +24,10 @@ const filterTask = async (req, res) => {
 
         if (categoria) {
             filter.categoria = categoria;
+        }
+
+        if (status) {
+            filter.status = status;
         }
 
         const task = await Task.find(filter);

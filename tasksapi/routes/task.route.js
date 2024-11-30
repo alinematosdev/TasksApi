@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/auth.middleware.js');
 
 router.use(authMiddleware);
 router.get('/', getTasks);
-router.get("/:id", filterTask);
+router.get("/filter/", filterTask);
 router.post("/", createTask);
 router.put("/:id", updateTask);
 router.delete("/:id", deleteTask);
