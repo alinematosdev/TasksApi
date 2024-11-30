@@ -1,17 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from 'C:\Users\victo\OneDrive\Documentos\GitHub\TasksApi\tasksweb\src\App.vue';
-import Register from 'C:\Users\victo\OneDrive\Documentos\GitHub\TasksApi\tasksweb\src\components\register.vue';
+import Login from '../components/LoginComponent.vue';
+import Register from '../components/RegisterComponent.vue';
+import Home from '../components/HomePage.vue';
 
-// Definindo as rotas do aplicativo
+
 const routes = [
-  { path: '/', component: Login }, // Página de login
-  { path: '/register', component: Register } // Página de cadastro
-];
+    {
+        path:'/',
+        name: 'login',
+        component: Login,
+    },
+    {
+        path:'/RegisterComponent',
+        name: 'register',
+        component: Register,
+    },
+    {
+        path: '/Home',
+        name: 'home',
+        component: Home,
+    },
 
-// Criando a instância do Vue Router com o histórico de navegação
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+   
+]
+
+const router = createRouter
+({
+    history: createWebHistory(),
+    routes,
 });
 
 export default router;
