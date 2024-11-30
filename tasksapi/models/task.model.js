@@ -34,6 +34,16 @@ const TaskSchema = mongoose.Schema(
             required: [true, "Escolha um status para a tarefa"],
             maxlength: [20, "Limite de 1000 caracteres"],
         },
+        prioridade: {
+            type: String,
+            enum: ["Alta", "Média", "Baixa"],
+            default: "Baixa",
+        },
+        usuario: {  // Add the 'usuario' field to link each task to a user
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
     },
     {
         timestamps: true,
