@@ -1,21 +1,13 @@
 <template>
   <div id="app">
-    <LoginComponent/>
-      <router-view />
+    <!-- Conteúdo global, como barra de navegação, se necessário -->
+    <router-view /> <!-- O Vue Router renderiza aqui o componente da rota atual -->
   </div>
 </template>
 
 <script>
-import LoginComponent from './components/LoginComponent.vue';
-
 export default {
-
   name: 'App',
-  components: {
-    LoginComponent,
-   
-
-  },
 };
 </script>
 
