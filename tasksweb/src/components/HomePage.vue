@@ -49,9 +49,14 @@
           <input type="text" v-model="form.title" placeholder="Título da Tarefa" required />
           <textarea v-model="form.description" placeholder="Descrição da Tarefa"></textarea>
           <select v-model="form.status" required>
-            <option value="pendente">Pendente</option>
-            <option value="concluida">Concluída</option>
-            <option value="atrasada">Atrasada</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Concluída">Concluída</option>
+            <option value="Atrasada">Atrasada</option>
+          </select>
+          <select v-model="form.priority" required>
+            <option value="Alta">Alta</option>
+            <option value="Média">Média</option>
+            <option value="Baixa">Baixa</option>
           </select>
           <button type="submit">{{ editingTask ? "Atualizar" : "Criar" }}</button>
         </form>
@@ -60,34 +65,50 @@
   </template>
   
   <script>
+
+  import axios from "axios";
+
   export default {
     data() {
       return {
         userName: "Usuário", // Nome fictício, pode ser substituído por um dado real
         tasks: [
-          { id: 1, title: "Tarefa 1", description: "Descrição 1", status: "pendente" },
-          { id: 2, title: "Tarefa 2", description: "Descrição 2", status: "concluida" },
-          { id: 3, title: "Tarefa 3", description: "Descrição 3", status: "atrasada" },
+          { id: 1, title: "Tarefa 1", description: "Descrição 1", status: "Pendente" },
+          { id: 2, title: "Tarefa 2", description: "Descrição 2", status: "Concluida" },
+          { id: 3, title: "Tarefa 3", description: "Descrição 3", status: "Atrasada" },
         ],
         form: {
           title: "",
           description: "",
-          status: "pendente",
+          status: "Pendente",
+          priority: "Baixa",
         },
         editingTask: null,
         searchQuery: "",
         filterStatus: "",
       };
     },
+
+    created() {
+    // Recupere os dados do usuário do localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("Dados recuperados do localStorage:", user);
+    if (user && user.nome) {
+      this.userName = user.nome;
+        }  else {
+      this.userName = "Usuário";
+      }
+    },
+
     computed: {
       pendingTasks() {
-        return this.tasks.filter((task) => task.status === "pendente").length;
+        return this.tasks.filter((task) => task.status === "Pendente").length;
       },
       completedTasks() {
-        return this.tasks.filter((task) => task.status === "concluida").length;
+        return this.tasks.filter((task) => task.status === "Concluida").length;
       },
       overdueTasks() {
-        return this.tasks.filter((task) => task.status === "atrasada").length;
+        return this.tasks.filter((task) => task.status === "Atrasada").length;
       },
       filteredTasks() {
         return this.tasks.filter((task) => {
@@ -98,21 +119,48 @@
         });
       },
     },
+    
     methods: {
       applyFilters() {
         // Filtragem será aplicada automaticamente via `computed`.
       },
-      submitTask() {
-        if (this.editingTask) {
-          // Atualizar tarefa existente
-          Object.assign(this.editingTask, this.form);
-          this.editingTask = null;
-        } else {
-          // Criar nova tarefa
-          const newTask = { ...this.form, id: Date.now() };
-          this.tasks.push(newTask);
+      async submitTask() {
+      // Verificar se está editando uma tarefa existente ou criando uma nova
+      const user = JSON.parse(localStorage.getItem("user"));
+      // Adicionando 1 dia à data atual e atribuindo à data de vencimento para não gerar erro. *Adicionar campo de data de vencimento.
+      const nextDay = new Date();
+      nextDay.setDate(nextDay.getDate() + 1); 
+      const taskData = {
+        titulo: this.form.title,
+        descricao: this.form.description,
+        status: this.form.status,
+        prioridade: this.form.priority,
+        categoria: "geral",
+        dataVencimento: nextDay.toISOString(),
+      };
+
+      try {
+        // Se estiver editando a tarefa
+          if (this.editingTask) {
+            await axios.put(`http://localhost:2707/api/tasks/${this.editingTask.id}`, taskData, {
+              headers: {
+                Authorization: `Bearer ${user.token}`, // Adiciona o token do usuário para autenticação
+              },
+            });
+            console.log("Tarefa atualizada com sucesso");
+          } else {
+            // Se for uma nova tarefa, faz o POST
+            await axios.post("http://localhost:2707/api/tasks", taskData, {
+              headers: {
+                Authorization: `Bearer ${user.token}`, // Adiciona o token do usuário para autenticação
+              },
+            });
+            console.log("Tarefa criada com sucesso");
+          }
+          this.resetForm(); // Limpa o formulário
+        } catch (error) {
+          console.error("Erro ao salvar a tarefa:", error.response ? error.response.data : error.message);
         }
-        this.resetForm();
       },
       editTask(task) {
         this.editingTask = task;
@@ -122,7 +170,7 @@
         this.tasks = this.tasks.filter((task) => task.id !== taskId);
       },
       resetForm() {
-        this.form = { title: "", description: "", status: "pendente" };
+        this.form = { title: "", description: "", status: "Pendente" };
       },
     },
   };

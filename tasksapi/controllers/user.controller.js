@@ -51,7 +51,7 @@ const loginUser = async (req, res) => {
     }
 };
 
-// Listar todos os usuários
+// Listar todos os usuários (Admin)
 
 const getUsers = async (req, res) => {
     try {

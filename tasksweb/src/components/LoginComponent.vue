@@ -3,8 +3,8 @@
       <h2>Login</h2>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label for="username">Nome de Usuário</label>
-          <input type="text" id="username" v-model="username" placeholder="Digite seu nome de usuário" required />
+          <label for="username">Insira seu e-mail</label>
+          <input type="text" id="username" v-model="email" placeholder="Digite seu nome de usuário" required />
         </div>
         <div class="form-group">
           <label for="password">Senha</label>
@@ -26,32 +26,73 @@
   </template>
   
   <script>
+
+  import axios from "axios";
+
   export default {
-    name: "LoginCompont",
+    name: "LoginComponent",
     data() {
       return {
-        username: '',
+        email: '',
         password: '',
         errorMessage: ''
       };
     },
+
     methods: {
-      handleSubmit() {
+
+      async handleSubmit() {
         // Lógica de autenticação (exemplo simples)
-        if (this.username === 'admin' && this.password === '12345') {
-          alert('Login bem-sucedido!');
-          // Redirecionar para a página principal ou dashboard
-        } else {
-          this.errorMessage = 'Usuário ou senha incorretos!';
+        if (!this.email || !this.password) {
+        this.errorMessage = 'Por favor, preencha todos os campos.';
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:2707/api/users/login", {
+          email: this.email,
+          password: this.password
+        });
+
+        console.log("Resposta da API:", response.data);
+
+        // Verificar se o usuário existe
+        if (response.data?.token) {
+        const user = {
+          email: response.data.email,
+          nome: response.data.nome,
+          token: response.data.token,
+        };
+
+        // Salva os dados completos do usuário no localStorage
+        localStorage.setItem("user", JSON.stringify(user));
+
+        console.log("Dados salvos no localStorage:", user);
+        
+        this.goToHomePage();
+
         }
+      } catch (error) {
+        if (error.response && error.response.data.message) {
+          this.errorMessage = error.response.data.message;
+        } else {
+          this.errorMessage = "Usuário ou senha incorretos";
+        }
+      }
+
       },
       goToHomePage(){
-        alert('abrir tela inicial');
+      //Se usuário existe vai para a Home Page
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user && user.token) {
         this.$router.push('/Home');
+      } else {
+        this.errorMessage = 'Usuário não autenticado';
+      }
       },
       goToRegister() {
         // Aqui você pode navegar para a página de registro ou abrir um modal de cadastro
-        alert('Abrir tela de cadastro');
+        alert('Abrindo tela de cadastro...');
         // Exemplo de redirecionamento para outra rota (se você tiver um sistema de rotas configurado)
         this.$router.push('/RegisterComponent');
    

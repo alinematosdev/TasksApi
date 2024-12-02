@@ -28,6 +28,9 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -38,18 +41,44 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+
+    isPasswordStrong(password) {
+      const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      return regex.test(password);
+    },
+
+    async handleSubmit() {
       // Lógica de validação simples para o cadastro
       if (!this.fullName || !this.email || !this.password) {
         this.errorMessage = 'Todos os campos são obrigatórios!';
         return;
       }
 
+      if (!this.isPasswordStrong(this.password)) {
+        this.errorMessage = 'A senha deve ter pelo menos 8 caracteres, conter letras, números e caracteres especiais.';
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:2707/api/users/registro", {
+          nome: this.fullName,
+          email: this.email,
+          password: this.password
+        });
+
       // Lógica de cadastro (aqui você pode adicionar uma chamada à API para criar o usuário)
-      alert(`Usuário ${this.fullName} registrado com sucesso!`);
+      alert(`Usuário ${response.data.nome} registrado com sucesso!`);
 
       // Redirecionar para a tela de login após o cadastro
       this.$router.push('/');
+    } catch (error) {
+        
+        if (error.response && error.response.data.message) {
+          this.errorMessage = error.response.data.message;
+        } else {
+          this.errorMessage = "Erro ao cadastrar usuário.";
+        }
+      }
     },
     goToLogin() {
       this.$router.push('/');
