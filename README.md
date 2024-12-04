@@ -44,14 +44,14 @@ cd Tasks-Api
 
 ## Pré-requisitos
 
-Express.js
-MongoDB
-Mongoose
-jsonwebtoken
-bcrypt
-Vue
-Axios
-Cors
+Express.js/ 
+MongoDB/ 
+Mongoose/ 
+jsonwebtoken/ 
+bcrypt/ 
+Vue/ 
+Axios/ 
+Cors/ 
 
 ## Como contribuir
 
