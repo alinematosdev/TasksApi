@@ -28,8 +28,41 @@ Esta API tem como objetivo o gerenciamento de tarefas e produtividade, permitind
 
 ---
 
-##Como baixar o repositório
+## Como baixar o repositório
 
+1. Verifique sua versão do git
+   
+git --version
+
+2. Clone o repositório 
+
+git@github.com:alinematosdev/TasksApi.git
+
+3. Acessa a pasta do projeto
+
+cd Tasks-Api
+
+## Pré-requisitos
+
+Express.js
+MongoDB
+Mongoose
+jsonwebtoken
+bcrypt
+Vue
+Axios
+Cors
+
+## Como contribuir
+
+1. Realizar Fork
+2. Criar uma branch para as modificações
+3. Fazer commit na branch criada
+4. Criar Pull Request
+5. Clicar no botão “Compare & Pull Request”
+6. Selecionar a Branch “main” como base e a Branch criada “tasks-nomedabranch” como Branch de comparação
+7. Preencher os detalhes sobre a atualização ou modificação realizada
+8. Enviar Pull Request e aguardar aprovação
 
 
 ## 🚀 **Tecnologias Utilizadas**
@@ -45,3 +78,18 @@ Esta API tem como objetivo o gerenciamento de tarefas e produtividade, permitind
 ### **Front-End**
 - Vue.js (com Vue CLI)
 - Axios para comunicação HTTP
+
+## Autores
+
+Aline Morais Matos
+Victor Nascimento Aguiar
+Fábio Rodrigues da Silva Júnior
+Matheus Braynner Silva de Souza
+Lucas Gabriel Oliveira da Silva
+Rodrigo Luiz Antão de Andrade Santos
+
+## 📝 Licença
+
+Este projeto está licenciado sob a licença [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+
