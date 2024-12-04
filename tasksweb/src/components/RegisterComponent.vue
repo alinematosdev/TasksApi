@@ -3,7 +3,7 @@
     <h2>Cadastrar Usuário</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
-        <label for="fullName">Nome Completo</label>
+        <label for="fullName">Nome</label>
         <input type="text" id="fullName" v-model="fullName" placeholder="Digite seu nome completo" required />
       </div>
       <div class="form-group">
@@ -59,6 +59,7 @@ export default {
         return;
       }
 
+      // Lógica de cadastro (aqui você pode adicionar uma chamada à API para criar o usuário)
       try {
         const response = await axios.post("http://localhost:2707/api/users/registro", {
           nome: this.fullName,
@@ -66,7 +67,6 @@ export default {
           password: this.password
         });
 
-      // Lógica de cadastro (aqui você pode adicionar uma chamada à API para criar o usuário)
       alert(`Usuário ${response.data.nome} registrado com sucesso!`);
 
       // Redirecionar para a tela de login após o cadastro

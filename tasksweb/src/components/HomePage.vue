@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <header>
-      <h1>Bem-vindo, {{ userName }}</h1>
+      <h1>Bem-vindo(a), {{ userName }}</h1>
       <p>Gerencie suas tarefas e produtividade.</p>
     </header>
 
@@ -33,10 +33,12 @@
       <h2>Lista de Tarefas</h2>
       <ul>
         <li v-for="task in filteredTasks" :key="task.id">
-          <h3>{{ task.title }}</h3>
-          <p>{{ task.description }}</p>
-          <small>Categoria: {{ task.category || 'Sem Categoria' }}</small>
+          <h3>{{ task.titulo }}</h3>
+          <p>{{ task.descricao }}</p>
+          <small>Categoria: {{ task.categoria || 'Sem Categoria' }}</small>
           <small>Status: {{ task.status }}</small>
+          <small>Prioridade: {{ task.prioridade }}</small>
+          <small class="due-date">Data de Vencimento: {{ new Date(task.dataVencimento).toLocaleDateString() }}</small>
           <button @click="editTask(task)">Editar</button>
           <button @click="deleteTask(task.id)">Excluir</button>
         </li>
@@ -49,17 +51,21 @@
       <form @submit.prevent="submitTask">
         <input type="text" v-model="form.title" placeholder="Título da Tarefa" required />
         <textarea v-model="form.description" placeholder="Descrição da Tarefa"></textarea>
-        <select v-model="form.category">
-          <option v-for="category in categories" :key="category" :value="category">
-            {{ category }}
+        <input type="date" v-model="form.dataVencimento" placeholder="Data de Vencimento" required />
+        <label for="category-select">Categoria</label>
+        <select v-model="form.category" placeholder="Categoria">
+          <option v-for="category in categories" :key="category" :value="category.nome">
+            {{ category.nome }}
           </option>
           <option value="">Sem Categoria</option>
         </select>
+        <label for="status-select">Status</label>
         <select v-model="form.status" required>
           <option value="Pendente">Pendente</option>
           <option value="Concluída">Concluída</option>
           <option value="Atrasada">Atrasada</option>
         </select>
+        <label for="priority-select">Prioridade</label>
         <select v-model="form.priority" required>
           <option value="Alta">Alta</option>
           <option value="Média">Média</option>
@@ -76,8 +82,8 @@
       <button @click="addCategory">Adicionar Categoria</button>
       <ul>
         <li v-for="category in categories" :key="category">
-          {{ category }}
-          <button @click="deleteCategory(category)">Excluir</button>
+          {{ category.nome }}
+          <button @click="deleteCategory(category._id)">Excluir</button>
         </li>
       </ul>
     </section>
@@ -91,19 +97,16 @@ export default {
   data() {
     return {
       userName: "Usuário",
-      tasks: [
-        { id: 1, title: "Tarefa 1", description: "Descrição 1", category: "Trabalho", status: "Pendente" },
-        { id: 2, title: "Tarefa 2", description: "Descrição 2", category: "Pessoal", status: "Concluída" },
-        { id: 3, title: "Tarefa 3", description: "Descrição 3", category: "Estudo", status: "Atrasada" },
-      ],
-      categories: ["Trabalho", "Pessoal", "Estudo"],
+      tasks: [],
+      categories: [],
       newCategory: "",
       form: {
-        title: "",
-        description: "",
-        category: "",
+        titulo: "",
+        descricao: "",
+        dataVencimento: "",
+        categoria: "Sem categoria",
         status: "Pendente",
-        priority: "Baixa",
+        prioridade: "Baixa",
       },
       editingTask: null,
       searchQuery: "",
@@ -114,14 +117,20 @@ export default {
   created() {
     const user = JSON.parse(localStorage.getItem("user"));
     console.log("Dados recuperados do localStorage:", user);
+    
     if (user && user.nome) {
       this.userName = user.nome;
     } else {
       this.userName = "Usuário";
     }
+
+    this.fetchCategories();
+    this.fetchTasks();
+    
   },
 
   computed: {
+    
     pendingTasks() {
       return this.tasks.filter((task) => task.status === "Pendente").length;
     },
@@ -133,41 +142,89 @@ export default {
     },
     filteredTasks() {
       return this.tasks.filter((task) => {
-        return (
-          (!this.filterStatus || task.status === this.filterStatus) &&
-          (!this.searchQuery || task.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
-        );
-      });
+    const matchesStatus = !this.filterStatus || task.status === this.filterStatus;
+    const matchesTitle =
+      !this.searchQuery || (task.titulo && task.titulo.toLowerCase().includes(this.searchQuery.toLowerCase()));
+
+    return matchesStatus && matchesTitle;
+  });
     },
   },
 
   methods: {
     applyFilters() {
-      // Filtragem será aplicada automaticamente via `computed`.
+      // Filtragem será aplicada automaticamente via 'computed'.
     },
+
+        async fetchTasks() {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const response = await axios.get("http://localhost:2707/api/tasks", {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        this.tasks = response.data;
+        console.log("Response data:", response.data); // Atualiza a lista de tarefas
+        console.log("Tarefas carregadas:", this.tasks);
+      } catch (error) {
+        console.error("Erro ao buscar tarefas:", error.response?.data || error.message);
+      }
+    },
+
+    /*async applyFiltersTasks() {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      try {
+        // Constrói a URL com base nos filtros
+        const queryParams = new URLSearchParams();
+
+        if (this.searchQuery) {
+          queryParams.append("titulo", this.searchQuery);
+        }
+
+        if (this.filterStatus) {
+          queryParams.append("status", this.filterStatus);
+        }
+
+        const response = await axios.get(
+          `http://localhost:2707/api/tasks/filter?${queryParams.toString()}`,
+          {
+            headers: { Authorization: `Bearer ${user.token}` },
+          }
+        );
+
+        this.tasks = response.data;
+      } catch (error) {
+        console.error("Erro ao aplicar filtros:", error.response?.data || error.message);
+        alert("Erro ao aplicar filtros.");
+      }
+    },*/
+
     async submitTask() {
       const user = JSON.parse(localStorage.getItem("user"));
-      const nextDay = new Date();
-      nextDay.setDate(nextDay.getDate() + 1);
       const taskData = {
         titulo: this.form.title,
         descricao: this.form.description,
         status: this.form.status,
+        dataVencimento: this.form.dataVencimento,
         prioridade: this.form.priority,
         categoria: this.form.category || "Geral",
-        dataVencimento: nextDay.toISOString(),
       };
 
       try {
         if (this.editingTask) {
-          await axios.put(`http://localhost:2707/api/tasks/${this.editingTask.id}`, taskData, {
+          console.log("editingTask:", this.editingTask);
+          await axios.put(`http://localhost:2707/api/tasks/${this.editingTask._id}`, taskData, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
           console.log("Tarefa atualizada com sucesso");
+          this.fetchTasks();
+          alert("Tarefa atualizada com sucesso");
         } else {
           await axios.post("http://localhost:2707/api/tasks", taskData, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
+          alert("Tarefa criada com sucesso");
+          this.fetchTasks();
           console.log("Tarefa criada com sucesso");
         }
         this.resetForm();
@@ -175,9 +232,11 @@ export default {
         console.error("Erro ao salvar a tarefa:", error.response ? error.response.data : error.message);
       }
     },
+
     editTask(task) {
       this.editingTask = task;
       this.form = { ...task };
+      console.log("Tarefa para editar:", this.editingTask);
     },
     deleteTask(taskId) {
       this.tasks = this.tasks.filter((task) => task.id !== taskId);
@@ -185,23 +244,63 @@ export default {
     resetForm() {
       this.form = { title: "", description: "", category: "", status: "Pendente", priority: "Baixa" };
     },
-    addCategory() {
-      if (this.newCategory && !this.categories.includes(this.newCategory)) {
-        this.categories.push(this.newCategory);
-        this.newCategory = "";
+
+    async fetchCategories() {
+      try {
+        const response = await axios.get("http://localhost:2707/api/categories", {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+          },
+        });
+        this.categories = response.data;
+        console.log(this.categories);
+        this.categories = response.data;
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error.response?.data || error.message);
       }
     },
-    deleteCategory(category) {
-      this.categories = this.categories.filter((cat) => cat !== category);
-      this.tasks = this.tasks.map((task) =>
-        task.category === category ? { ...task, category: "" } : task
-      );
+
+    async addCategory() {
+      if (!this.newCategory) return alert("Por favor, insira um nome para a categoria.");
+
+      try {
+        const response = await axios.post(
+          "http://localhost:2707/api/categories",
+          { nome: this.newCategory },
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+            },
+          }
+        );
+        this.categories.push(response.data);
+        this.newCategory = "";
+        alert("Categoria criada com sucesso");
+      } catch (error) {
+        console.error("Erro ao adicionar categoria:", error.response?.data || error.message);
+      }
+    },
+
+    async deleteCategory(categoryId) {
+      try {
+        await axios.delete(`http://localhost:2707/api/categories/${categoryId}`, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+          },
+        });
+        this.categories = this.categories.filter(category => category._id !== categoryId);
+      } catch (error) {
+        console.error("Erro ao excluir categoria:", error.response?.data || error.message);
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .dashboard {
   max-width: 800px;
   margin: 0 auto;
@@ -214,7 +313,8 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 25px;
   color: #333;
 }
 
@@ -269,6 +369,7 @@ header p {
   border: 1px solid #ddd;
   border-radius: 6px;
   background-color: #f9f9f9;
+  position: relative;
 }
 
 .task-list h3 {
@@ -286,7 +387,15 @@ header p {
 .task-list small {
   display: block;
   font-size: 12px;
-  color: #999;
+  color: #868686;
+}
+
+.task-list small:first-of-type {
+  padding: 4px 0;
+}
+
+.task-list small:last-of-type {
+  padding: 4px 0;
 }
 
 .task-list button {
@@ -316,6 +425,14 @@ header p {
   background-color: #bd2130;
 }
 
+.task-list .due-date {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: #868686;
+}
+
 /* Formulário de Tarefas */
 .task-form input,
 .task-form textarea,
@@ -342,6 +459,33 @@ header p {
 
 .task-form button:hover {
   background-color: #218838;
+}
+
+.task-list button:first-of-type {
+  background-color: #999999;
+  color: white;
+}
+
+.task-list button:first-of-type:hover {
+  background-color: #0056b3; 
+}
+
+.task-list button:last-of-type {
+  background-color: #dc3545; 
+  color: white;
+}
+
+.task-list button:last-of-type:hover {
+  background-color: #bd2130; 
+}
+
+.task-list small:nth-of-type(3) {
+  padding-bottom: 8px;
+  padding-top: 4px;
+}
+
+.task-list small:last-of-type {
+  color: rgb(60, 60, 70);
 }
 
 /* Gerenciamento de Categorias */
@@ -399,6 +543,14 @@ header p {
 
 .categories li button:hover {
   background-color: #bd2130;
+}
+
+.task-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
 }
 
 </style>

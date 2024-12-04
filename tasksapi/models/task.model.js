@@ -18,9 +18,11 @@ const TaskSchema = mongoose.Schema(
             required: [true, "Insira uma data de vencimento para a tarefa"],
             validate: {
                 validator: function (value) {
-                    return value > new Date();
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return value >= today;
                 },
-                message: "A data de vencimento deve ser no futuro",
+                message: "A data de vencimento deve ser hoje ou no futuro",
             },
         },
         status: {
@@ -31,7 +33,7 @@ const TaskSchema = mongoose.Schema(
         },
         categoria: {
             type: String,
-            required: [true, "Escolha um status para a tarefa"],
+            required: [true, "Escolha uma categoria para a tarefa"],
             maxlength: [20, "Limite de 1000 caracteres"],
         },
         prioridade: {
@@ -39,7 +41,7 @@ const TaskSchema = mongoose.Schema(
             enum: ["Alta", "Média", "Baixa"],
             default: "Baixa",
         },
-        usuario: {  // Add the 'usuario' field to link each task to a user
+        usuario: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true,

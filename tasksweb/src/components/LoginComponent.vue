@@ -31,6 +31,11 @@
 
   export default {
     name: "LoginComponent",
+
+    mounted() {
+      localStorage.clear();
+    },
+
     data() {
       return {
         email: '',
@@ -42,7 +47,7 @@
     methods: {
 
       async handleSubmit() {
-        // Lógica de autenticação (exemplo simples)
+        // Lógica de autenticação 
         if (!this.email || !this.password) {
         this.errorMessage = 'Por favor, preencha todos os campos.';
         return;

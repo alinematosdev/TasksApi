@@ -1,6 +1,6 @@
 const Task = require('../models/task.model');
 
-//Ler todas as tarefas
+//Ler todas as tarefas do usuário
 
 const getTasks = async (req, res) => {
     try {
@@ -15,15 +15,11 @@ const getTasks = async (req, res) => {
 
 const filterTask = async (req, res) => {
     try {
-        const { titulo, categoria, status } = req.query;
+        const { titulo, status } = req.query;
         let filter = { usuario: req.user.id };
 
         if (titulo) {
             filter.titulo = titulo;
-        }
-
-        if (categoria) {
-            filter.categoria = categoria;
         }
 
         if (status) {
