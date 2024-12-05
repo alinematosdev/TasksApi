@@ -24,6 +24,10 @@ MongoDB
 
 ## Instalação de Dependências
 
+Documentação: ## 📄 Definição de ferramentas
+
+[Documentação Completa](tasksdocs/DefiniçãoFerramentas.pdf)
+
 ### tasksapi (Back-end):
 
 npm init -y  
