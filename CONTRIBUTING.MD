@@ -57,19 +57,19 @@ Execute o servidor com "npm run serve"
 ## 🤝 Como Contribuir
 
 1. Criar uma Branch
-Antes de iniciar qualquer modificação, crie uma nova branch para organizar seu trabalho.
+  Antes de iniciar qualquer modificação, crie uma nova branch para organizar seu trabalho.
 
-git checkout -b tasks-nome-da-branch 
+  git checkout -b tasks-nome-da-branch 
 
 2. Fazer Alterações
-Realize suas alterações no código.
-Certifique-se de seguir as boas práticas e testar suas alterações localmente.
+  Realize suas alterações no código.
+  Certifique-se de seguir as boas práticas e testar suas alterações localmente.
 
 3. Commit e Push
 
-git add .  
-git commit -m "Mensagem de commit" 
-git push origin tasks-nome-da-branch  
+  git add .  
+  git commit -m "Mensagem de commit" 
+  git push origin tasks-nome-da-branch  
 
 
 4. Criar um Pull Request
