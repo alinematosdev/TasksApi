@@ -28,10 +28,8 @@ MongoDB
 
 ## Instalação de Dependências
 
-tasksapi:
+### tasksapi (Back-end):
 
-bash
-Copiar código
 npm init -y  
 npm install express  
 npm install nodemon  
@@ -39,27 +37,21 @@ npm install mongodb
 npm install mongoose  
 npm install jsonwebtoken  
 npm install bcrypt  
-npm install cors  
-Execute o servidor com:
+npm install cors
 
-bash
+Executar servidor com "npm run dev"
 
 Para facilitar dev:
 
 nodemon server.js  
 
-tasksweb:
+### tasksweb (Front-end):
 
-bash
-Copiar código
 npm install -g @vue/cli  
 npm install vue/router  
 npm install axios  
-Execute o servidor com:
 
-bash
-Copiar código
-npm run serve  
+Execute o servidor com "npm run serve"
 
 
 ## 🤝 Como Contribuir
