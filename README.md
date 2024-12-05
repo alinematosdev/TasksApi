@@ -97,10 +97,6 @@ Acesse a coleção aqui https://web.postman.co/workspace/TasksAPI~0d24abaa-8f73-
 - Vue.js (com Vue CLI)
 - Axios para comunicação HTTP
 
-### 📄 Documentação:
-
-[Definição de ferramentas](tasksdocs/DefiniçãoFerramentas.pdf)
-
 ### Interface Web
 
 Login
@@ -116,6 +112,11 @@ Home
 ![Tela Home 1](https://github.com/user-attachments/assets/df089922-08ff-42ae-b59f-9c96ba23e2b9)
 
 ![Tela Home 2](https://github.com/user-attachments/assets/e7a919fb-bb40-4eda-8670-2ee5c468713d)
+
+
+## 📄 Documentação:
+
+[Definição de ferramentas do front-end e back-end](tasksdocs/DefiniçãoFerramentas.pdf)
 
 
 ## Autores
