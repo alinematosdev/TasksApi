@@ -28,11 +28,6 @@ Esta API tem como objetivo o gerenciamento de tarefas e produtividade, permitind
 
 ---
 
-## Relacionamento entre os documentos
-
-![Diagrama Banco](https://github.com/user-attachments/assets/e10725c5-5e05-4a82-b8ef-9fbadb9f3870)
-
-
 ## Como baixar o repositório
 
 1. Verifique sua versão do git
@@ -80,7 +75,7 @@ Cors/
 - JWT (JSON Web Tokens) para autenticação
 - bcrypt.js para hashing
 
-## Coleção Postman
+### Coleção Postman
 
 ![Imagem coleção](https://github.com/user-attachments/assets/6b3b6426-0573-4e22-b051-d128cf080305)
 
@@ -95,9 +90,30 @@ Acesse a coleção aqui https://web.postman.co/workspace/TasksAPI~0d24abaa-8f73-
 ![Requisicao Criar Tarefa](https://github.com/user-attachments/assets/7c68d180-be3a-4145-be92-b7543d87225c)
 
 
+### Relacionamento entre os documentos
+
+![Diagrama Banco](https://github.com/user-attachments/assets/e10725c5-5e05-4a82-b8ef-9fbadb9f3870)
+
+
 ### **Front-End**
 - Vue.js (com Vue CLI)
 - Axios para comunicação HTTP
+
+### Interface Web
+
+Login
+
+![Imagem Tela Login](https://github.com/user-attachments/assets/a4082dc1-537f-4df7-a967-9e6743252047)
+
+Cadastro
+
+![Imagem Tela Cadastro](https://github.com/user-attachments/assets/b292d2cc-9963-4216-8413-521c71be983f)
+
+Home
+
+![Tela Home 1](https://github.com/user-attachments/assets/df089922-08ff-42ae-b59f-9c96ba23e2b9)
+
+![Tela Home 2](https://github.com/user-attachments/assets/e7a919fb-bb40-4eda-8670-2ee5c468713d)
 
 
 ## Autores
