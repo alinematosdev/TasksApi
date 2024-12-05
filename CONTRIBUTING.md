@@ -1,4 +1,5 @@
 # Guia de Contribuição
+
 ## 📖 Descrição do Projeto
 Este projeto é uma API de Controle de Tarefas e Produtividade que permite gerenciar tarefas com recursos como criação, edição, exclusão, categorização, filtragem e autenticação de usuários. Sua contribuição é bem-vinda para melhorar ou expandir as funcionalidades existentes!
 
@@ -12,7 +13,7 @@ Clone o repositório forkado para sua máquina local:
 * cd seu-fork  
 * Adicione o repositório original como remoto para manter sua branch atualizada:
 
-git remote add upstream git@github.com:repositorio-original/repo.git
+git remote add upstream git@github.com:alinematosdev/TasksApi.git
 
 ## ✅ Pré-requisitos
 Antes de começar, certifique-se de ter instalado em sua máquina:
