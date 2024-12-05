@@ -69,7 +69,9 @@ Contribuições são bem-vindas! Para contribuir por favor siga as intruções d
 
 ## 🚀 **Fluxo de trabalho**
 
-[Fluxo de trabalho GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
+Fluxo de trabalho seguido por equipe de desenvolvimento e exemplos de ações realizadas.
+
+* [Fluxo de trabalho GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
 
 ### Coleção Postman
 
