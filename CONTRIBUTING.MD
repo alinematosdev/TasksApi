@@ -24,9 +24,9 @@ MongoDB
 
 ## Instalação de Dependências
 
-Documentação: ## 📄 Definição de ferramentas
+## 📄 Documentação:
 
-[Documentação Completa](tasksdocs/DefiniçãoFerramentas.pdf)
+[Definição de ferramentas](tasksdocs/DefiniçãoFerramentas.pdf)
 
 ### tasksapi (Back-end):
 
@@ -55,6 +55,10 @@ Execute o servidor com "npm run serve"
 
 
 ## 🤝 Como Contribuir
+
+## 📄 Documentação:
+
+[Fluxo de Trabalho no GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
 
 1. Criar uma Branch
   Antes de iniciar qualquer modificação, crie uma nova branch para organizar seu trabalho.
