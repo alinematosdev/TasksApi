@@ -55,15 +55,7 @@ Cors/
 
 ## Como contribuir
 
-1. Realizar Fork
-2. Criar uma branch para as modificações
-3. Fazer commit na branch criada
-4. Criar Pull Request
-5. Clicar no botão “Compare & Pull Request”
-6. Selecionar a Branch “main” como base e a Branch criada “tasks-nomedabranch” como Branch de comparação
-7. Preencher os detalhes sobre a atualização ou modificação realizada
-8. Enviar Pull Request e aguardar aprovação
-
+Contribuições são bem-vindas! Para contribuir por favor siga as intruções detalhadas no arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 🚀 **Tecnologias Utilizadas**
 
@@ -74,6 +66,10 @@ Cors/
 - MongoDB (Mongoose)
 - JWT (JSON Web Tokens) para autenticação
 - bcrypt.js para hashing
+
+## 🚀 **Fluxo de trabalho**
+
+[Fluxo de trabalho GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
 
 ### Coleção Postman
 
@@ -90,7 +86,7 @@ Acesse a coleção aqui https://web.postman.co/workspace/TasksAPI~0d24abaa-8f73-
 ![Requisicao Criar Tarefa](https://github.com/user-attachments/assets/7c68d180-be3a-4145-be92-b7543d87225c)
 
 
-### Relacionamento entre os documentos
+### Relacionamento entre os documentos no MongoDB
 
 ![Diagrama Banco](https://github.com/user-attachments/assets/e10725c5-5e05-4a82-b8ef-9fbadb9f3870)
 
@@ -98,6 +94,10 @@ Acesse a coleção aqui https://web.postman.co/workspace/TasksAPI~0d24abaa-8f73-
 ### **Front-End**
 - Vue.js (com Vue CLI)
 - Axios para comunicação HTTP
+
+### 📄 Documentação:
+
+[Definição de ferramentas](tasksdocs/DefiniçãoFerramentas.pdf)
 
 ### Interface Web
 
