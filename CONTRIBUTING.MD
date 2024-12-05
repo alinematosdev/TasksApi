@@ -24,10 +24,6 @@ MongoDB
 
 ## Instalação de Dependências
 
-## 📄 Documentação:
-
-[Definição de ferramentas](tasksdocs/DefiniçãoFerramentas.pdf)
-
 ### tasksapi (Back-end):
 
 npm init -y  
@@ -43,7 +39,11 @@ Executar servidor com "npm run dev"
 
 Para facilitar dev:
 
-nodemon server.js  
+nodemon server.js
+
+### 📄 Documentação:
+
+[Definição de ferramentas](tasksdocs/DefiniçãoFerramentas.pdf)
 
 ### tasksweb (Front-end):
 
@@ -55,10 +55,6 @@ Execute o servidor com "npm run serve"
 
 
 ## 🤝 Como Contribuir
-
-## 📄 Documentação:
-
-[Fluxo de Trabalho no GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
 
 1. Criar uma Branch
   Antes de iniciar qualquer modificação, crie uma nova branch para organizar seu trabalho.
@@ -75,7 +71,6 @@ Execute o servidor com "npm run serve"
   git commit -m "Mensagem de commit" 
   git push origin tasks-nome-da-branch  
 
-
 4. Criar um Pull Request
 
 Acesse o repositório forkado no GitHub.
@@ -83,3 +78,7 @@ Clique em Compare & Pull Request.
 Escolha a branch main como base e a branch criada como comparação.
 Adicione uma descrição sobre sua contribuição e clique em Create Pull Request.
 Aguarde a revisão de um dos mantenedores do projeto.
+
+### 📄 Documentação:
+
+[Fluxo de Trabalho no GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
