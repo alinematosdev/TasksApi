@@ -75,9 +75,14 @@ Cors/
 - JWT (JSON Web Tokens) para autenticação
 - bcrypt.js para hashing
 
+## Exemplo de requisição no Postman
+
+![Requisicao Criar Categoria](https://github.com/user-attachments/assets/69dec1a2-2298-405c-87e7-fe227d02a81a)
+
 ### **Front-End**
 - Vue.js (com Vue CLI)
 - Axios para comunicação HTTP
+
 
 ## Autores
 
