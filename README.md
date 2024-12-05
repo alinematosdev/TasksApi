@@ -57,6 +57,12 @@ cd Tasks-Api
 
 Contribuições são bem-vindas! Para contribuir por favor siga as intruções detalhadas no arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## 🚀 **Fluxo de trabalho**
+
+Fluxo de trabalho seguido por equipe e exemplos de ações realizadas durante desenvolvimento.
+
+* [Fluxo de trabalho GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
+
 ## 🚀 **Tecnologias Utilizadas**
 
 ### **Back-End**
@@ -66,12 +72,6 @@ Contribuições são bem-vindas! Para contribuir por favor siga as intruções d
 - MongoDB (Mongoose)
 - JWT (JSON Web Tokens) para autenticação
 - bcrypt.js para hashing
-
-## 🚀 **Fluxo de trabalho**
-
-Fluxo de trabalho seguido por equipe de desenvolvimento e exemplos de ações realizadas.
-
-* [Fluxo de trabalho GIT](tasksdocs/FluxoTrabalhoGIT.pdf)
 
 ### Coleção Postman
 
