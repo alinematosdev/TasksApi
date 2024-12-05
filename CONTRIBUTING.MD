@@ -8,14 +8,10 @@ Faça um fork deste repositório clicando no botão Fork no canto superior direi
 
 Clone o repositório forkado para sua máquina local:
 
-* bash
-* Copiar código
 * git clone git@github.com:seu-usuario/seu-fork.git  
 * cd seu-fork  
 * Adicione o repositório original como remoto para manter sua branch atualizada:
 
-bash
-Copiar código
 git remote add upstream git@github.com:repositorio-original/repo.git
 
 ## ✅ Pré-requisitos
