@@ -8,14 +8,14 @@ Esta API tem como objetivo o gerenciamento de tarefas e produtividade, permitind
 
 ## 🔧 **Funcionalidades**
 
-- **Gerenciamento de Tarefas**
+- **Controle de Tarefas**
   - Criar, editar e excluir tarefas.
   - Definir status: "Pendente", "Concluída", "Atrasada".
   - Atribuir categorias às tarefas.
   - Configurar prioridades: "Alta", "Média", "Baixa".
   - Filtrar tarefas por título e status.
 
-- **Gerenciamento de Categorias**
+- **Controle de Categorias**
   - Criar e excluir categorias para organização de tarefas.
 
 - **Autenticação**
@@ -27,6 +27,11 @@ Esta API tem como objetivo o gerenciamento de tarefas e produtividade, permitind
   - Filtrar tarefas por status.
 
 ---
+
+## Relacionamento entre os documentos
+
+![Diagrama Banco](https://github.com/user-attachments/assets/e10725c5-5e05-4a82-b8ef-9fbadb9f3870)
+
 
 ## Como baixar o repositório
 
@@ -75,9 +80,20 @@ Cors/
 - JWT (JSON Web Tokens) para autenticação
 - bcrypt.js para hashing
 
-## Exemplo de requisição no Postman
+## Coleção Postman
+
+![Imagem coleção](https://github.com/user-attachments/assets/6b3b6426-0573-4e22-b051-d128cf080305)
+
+Acesse a coleção aqui https://web.postman.co/workspace/TasksAPI~0d24abaa-8f73-4a23-9570-8e9a457b5363/collection/39989838-789e8d9c-27fd-4531-92d5-907f6ea418d3
+
+### Exemplo - Criar uma categoria
 
 ![Requisicao Criar Categoria](https://github.com/user-attachments/assets/69dec1a2-2298-405c-87e7-fe227d02a81a)
+
+### Exemplo - Criar uma tarefa
+
+![Requisicao Criar Tarefa](https://github.com/user-attachments/assets/7c68d180-be3a-4145-be92-b7543d87225c)
+
 
 ### **Front-End**
 - Vue.js (com Vue CLI)
@@ -86,12 +102,12 @@ Cors/
 
 ## Autores
 
-Aline Morais Matos
-Victor Nascimento Aguiar
-Fábio Rodrigues da Silva Júnior
-Matheus Braynner Silva de Souza
-Lucas Gabriel Oliveira da Silva
-Rodrigo Luiz Antão de Andrade Santos
+* Aline Morais Matos
+* Victor Nascimento Aguiar
+* Fábio Rodrigues da Silva Júnior
+* Matheus Braynner Silva de Souza
+* Lucas Gabriel Oliveira da Silva
+* Rodrigo Luiz Antão de Andrade Santos
 
 ## 📝 Licença
 
